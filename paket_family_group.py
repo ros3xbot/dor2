@@ -5,9 +5,9 @@ from ui import (
     pause,
     console,
     _c,
-    THEMES,
     RICH_OK
 )
+
 try:
     from rich.table import Table
     from rich.panel import Panel
@@ -32,14 +32,17 @@ def show_family_group_menu(api_key: str, tokens: dict):
     while in_group_menu:
         clear_screen()
         if RICH_OK:
-            table = Table(title=f"[{_c('text_title')}]Family Code Group[/]", show_header=True, header_style=_c("text_sub"), box=ROUNDED)
+            table = Table(
+                title=f"[{_c('text_title')}]Family Code Group[/]", show_header=True,
+                header_style=_c("text_sub"), box=ROUNDED
+            )
             table.add_column("No", style=_c("text_number"), width=4)
             table.add_column("Kategori", style=_c("text_body"))
             for key, value in family_codes_grouped.items():
                 table.add_row(key, value['name'])
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu utama[/]")
             console.print(Align.center(table))
-            choice = Prompt.ask(f"[{_c('text_sub')}]Pilih kategori (nomor)")
+            choice = Prompt.ask(f"[{_c('text_sub')}]Pilih kategori (nomor)").strip()
         else:
             print("--------------------------")
             print("Pilih Kategori Family Code")
@@ -96,7 +99,10 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str):
         if RICH_OK:
             panel_title = f"[{_c('text_title')}]Family Name:[/] [{_c('text_ok')}]{family_name}[/{_c('text_ok')}]"
             console.print(Align.center(Panel(panel_title, style=_c("border_info"), box=ROUNDED)))
-            table = Table(title=f"[{_c('text_title')}]Paket Tersedia[/]", show_header=True, header_style=_c("text_sub"), box=ROUNDED)
+            table = Table(
+                title=f"[{_c('text_title')}]Paket Tersedia[/]", show_header=True,
+                header_style=_c("text_sub"), box=ROUNDED
+            )
             table.add_column("No", style=_c("text_number"), width=4)
             table.add_column("Nama Paket", style=_c("text_body"))
             table.add_column("Harga", style=_c("text_money"))
@@ -129,7 +135,7 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str):
         if RICH_OK:
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu sebelumnya[/]", "")
             console.print(Align.center(table))
-            pkg_choice = Prompt.ask(f"[{_c('text_sub')}]Pilih paket (nomor)")
+            pkg_choice = Prompt.ask(f"[{_c('text_sub')}]Pilih paket (nomor)").strip()
         else:
             print("99. Kembali ke menu sebelumnya")
             pkg_choice = input("Pilih paket (nomor): ").strip()
