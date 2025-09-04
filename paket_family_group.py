@@ -32,6 +32,7 @@ def show_family_group_menu(api_key: str, tokens: dict):
     while in_group_menu:
         clear_screen()
         if RICH_OK:
+            # Border panel untuk Family Code Group
             table = Table(
                 title=f"[{_c('text_title')}]Family Code Group[/]", show_header=True,
                 header_style=_c("text_sub"), box=ROUNDED
@@ -41,7 +42,13 @@ def show_family_group_menu(api_key: str, tokens: dict):
             for key, value in family_codes_grouped.items():
                 table.add_row(key, value['name'])
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu utama[/]")
-            console.print(Align.center(table))
+            panel = Panel(
+                Align.center(table),
+                title=f"[{_c('text_title')}]Pilih Family Code[/]",
+                border_style=_c("border_primary"),
+                box=ROUNDED
+            )
+            console.print(panel)
             choice = Prompt.ask(f"[{_c('text_sub')}]Pilih kategori (nomor)").strip()
         else:
             print("--------------------------")
@@ -134,7 +141,13 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str):
 
         if RICH_OK:
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu sebelumnya[/]", "")
-            console.print(Align.center(table))
+            panel = Panel(
+                Align.center(table),
+                title=f"[{_c('text_title')}]Daftar Paket[/]",
+                border_style=_c("border_info"),
+                box=ROUNDED
+            )
+            console.print(panel)
             pkg_choice = Prompt.ask(f"[{_c('text_sub')}]Pilih paket (nomor)").strip()
         else:
             print("99. Kembali ke menu sebelumnya")
