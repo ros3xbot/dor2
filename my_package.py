@@ -71,10 +71,10 @@ def fetch_my_packages():
         text = (
             f"Package {num}\n"
             f"Name        : {name}\n"
+            f"Description : {description}\n"
             f"Quota Code  : {quota_code}\n"
             f"Group Code  : {group_code}\n"
             f"Family Code : {family_code}\n"
-            f"Family Detail:\n{family_detail}"
         )
 
         if RICH_OK:
