@@ -35,8 +35,7 @@ def fetch_my_packages():
         print("===============================")
 
     res = send_api_request(api_key, path, payload, id_token, "POST")
-    if res.get("status") != "SUCCESS":
-        if RICH_OK:
+    if res.get("status") !=ICH_OK:
             console.print(f"[{_c('text_err')}]Failed to fetch packages[/]")
             console.print(f"[{_c('text_warn')}]Response: {res}[/]")
         else:
@@ -53,21 +52,23 @@ def fetch_my_packages():
         name = quota.get("name", "N/A")
         family_code = "N/A"
         family_detail = "-"
+        description = "-"
 
         if RICH_OK:
             console.print(f"[{_c('text_sub')}]Fetching package no. {num} details...[/]")
-        else:
-            print(f"Fetching package no. {num} details...")
+       . {num} details...")
 
         package_details = get_package(api_key, tokens, quota_code)
-        if package_details and "package_family" in package_details:
-            family_obj = package_details["package_family"]
-            family_code = family_obj.get("package_family_code", "N/A")
-            family_detail = "\n".join([f"{k}: {v}" for k, v in family_obj.items()])
+        if package_details:
+            if "package_family" in package_details:
+                family_obj = package_details["package_family"]
+                family_code = family_obj.get("package_family_code", "N/A")
+                family_detail = "\n".join([f"{k}: {v}" for k, v in family_obj.items()])
+            description = package_details.get("description", "-")
         else:
             family_detail = "-"
+            description = "-"
 
-        # Tampilkan paket tanpa tabel
         text = (
             f"Package {num}\n"
             f"Name        : {name}\n"
@@ -75,6 +76,7 @@ def fetch_my_packages():
             f"Quota Code  : {quota_code}\n"
             f"Group Code  : {group_code}\n"
             f"Family Code : {family_code}\n"
+            f"Family Detail:\n{family_detail}"
         )
 
         if RICH_OK:
