@@ -31,13 +31,7 @@ def fetch_my_packages():
 
     clear_screen()
     if RICH_OK:
-        panel = Panel(
-            Align.center(f"[{_c('text_sub')}]Fetching my packages...[/]"),
-            title=f"[{_c('text_title')}]My Packages[/]",
-            border_style=_c("border_primary"),
-            box=ROUNDED
-        )
-        console.print(panel)
+        console.print(f"[{_c('text_title')}]Fetching my packages...[/]")
     else:
         print("Fetching my packages...")
 
@@ -54,9 +48,10 @@ def fetch_my_packages():
 
     quotas = res["data"]["quotas"]
     clear_screen()
+    # Tampilkan judul di atas tabel
     if RICH_OK:
+        console.print(f"[{_c('text_title')}]My Packages[/]")
         table = Table(
-            title=f"[{_c('text_title')}]My Packages[/]",
             show_header=True, header_style=_c("text_sub"), box=ROUNDED
         )
         table.add_column("No", style=_c("text_number"), width=4)
@@ -112,12 +107,7 @@ def fetch_my_packages():
             print(family_detail)
             print("===============================")
 
+    # Tabel ditampilkan langsung, tanpa panel/border
     if RICH_OK:
-        panel = Panel(
-            Align.center(table),
-            title=f"[{_c('text_title')}]My Packages[/]",
-            border_style=_c("border_info"),
-            box=ROUNDED
-        )
-        console.print(panel)
+        console.print(table)
     pause()
