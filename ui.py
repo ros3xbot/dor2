@@ -243,8 +243,8 @@ def show_banner():
                 ("Flyxt9", _c("text_sub")),
                 (" ✦-----", _c("text_key"))
             )),
-            title=f"[{_c('text_title')}]Selamat Datang[/]",
-            subtitle="[dim]Powered by DratPVPN™[/]",
+            title=f"[{_c('text_title')}]SELAMAT DATANG[/]",
+            subtitle="[dim]Powered by dratx1[/]",
             border_style=_c("border_primary"),
             box=DOUBLE,
             padding=(1, 2)
