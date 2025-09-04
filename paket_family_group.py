@@ -44,7 +44,7 @@ def show_family_group_menu(api_key: str, tokens: dict):
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu utama[/]")
             panel = Panel(
                 Align.center(table),
-                title=f"[{_c('text_title')}]Pilih Paket Lainnya..[/]",
+                title=f"[{_c('text_title')}]Pilihan Paket Lainnya[/]",
                 border_style=_c("border_primary"),
                 box=ROUNDED
             )
