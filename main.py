@@ -4,7 +4,7 @@ from api_request import *
 from ui import *
 from paket_xut import get_package_xut
 from paket_mastif import get_package_mastif
-from paket_family_group import show_company_group_menu
+from paket_family_group import show_company_group_menu  # gunakan yang benar!
 from my_package import fetch_my_packages
 from paket_custom_family import get_packages_by_family
 from auth_helper import AuthInstance
@@ -45,8 +45,8 @@ def main():
                 show_package_menu(packages)
                 continue
             elif choice == "5":
-                # family group
-                show_family_group_menu(AuthInstance.api_key, active_user["tokens"])
+                # family group - ganti ke multi operator
+                show_company_group_menu(AuthInstance.api_key, active_user["tokens"])
                 continue
             elif choice == "6":
                 family_code = input("Enter family code (or '99' to cancel): ").strip()
