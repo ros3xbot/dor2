@@ -281,8 +281,9 @@ def show_main_menu(number, balance, balance_expired_at):
         menu.add_row("[bold]2[/]", "Lihat Paket Saya")
         menu.add_row("[bold]3[/]", "Beli Paket XUT")
         menu.add_row("[bold]4[/]", "Beli Masa Aktif")
-        menu.add_row("[bold]5[/]", "Beli Paket Berdasarkan Family Code")
-        menu.add_row("[bold]6[/]", f"[{_c('text_sub')}]Ganti Tema[/]")
+        menu.add_row("[bold]5[/]", "Family Code Group")
+        menu.add_row("[bold]6[/]", "Beli Paket Berdasarkan Family Code")
+        menu.add_row("[bold]7[/]", f"[{_c('text_sub')}]Ganti Tema[/]")
         menu.add_row("[bold]99[/]", f"[{_c('text_err')}]Tutup aplikasi[/]")
         _print_centered_panel(menu, title=f"[{_c('text_title')}]Menu[/]", border_style=_c("border_primary"))
     else:
@@ -297,8 +298,9 @@ def show_main_menu(number, balance, balance_expired_at):
         print("2. Lihat Paket Saya")
         print("3. Beli Paket XUT")
         print("4. Beli Masa Aktif")
-        print("5. Beli Paket Berdasarkan Family Code")
-        print("6. Ganti Tema")
+        print("5. Family Code Group")
+        print("6. Beli Paket Berdasarkan Family Code")
+        print("7. Ganti Tema")
         print("99. Tutup aplikasi")
         print("--------------------------")
 
