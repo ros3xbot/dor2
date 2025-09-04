@@ -9,6 +9,8 @@ from my_package import fetch_my_packages
 from paket_custom_family import get_packages_by_family
 from auth_helper import AuthInstance
 
+show_company_group_menu(api_key, tokens)
+
 show_menu = True
 
 def main():
