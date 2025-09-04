@@ -17,7 +17,7 @@ try:
 except ImportError:
     pass
 
-# Struktur dict di bawah: perusahaan -> kode family group
+# Struktur: perusahaan -> kode family group
 family_codes_grouped = {
     "XL": {
         "1": {"name": "Xta Unlimited Turbo", "code": "08a3b1e6-8e78-4e45-a540-b40f06871cfe"},
@@ -29,9 +29,8 @@ family_codes_grouped = {
         "7": {"name": "Xtra Combo Plus V1 & V2", "code": "23b71540-8785-4abe-816d-e9b4efa48f95"},
     },
     "AXIS": {
-        # Contoh, tambahkan kode family AXIS jika ada
+        # Tambahkan kode family AXIS jika ada
         # "1": {"name": "Axis Owsem", "code": "AXIS-CODE-1"},
-        # dst...
     },
     # Tambahkan perusahaan/operator lain di sini
 }
@@ -40,6 +39,7 @@ def show_company_group_menu(api_key: str, tokens: dict):
     in_company_menu = True
     while in_company_menu:
         clear_screen()
+        keys = list(family_codes_grouped.keys())
         if RICH_OK:
             table = Table(
                 title=f"[{_c('text_title')}]Daftar Operator/Perusahaan[/]",
@@ -47,7 +47,6 @@ def show_company_group_menu(api_key: str, tokens: dict):
             )
             table.add_column("No", style=_c("text_number"), width=4)
             table.add_column("Perusahaan/Operator", style=_c("text_body"))
-            keys = list(family_codes_grouped.keys())
             for idx, perusahaan in enumerate(keys, 1):
                 table.add_row(str(idx), perusahaan)
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu utama[/]")
@@ -62,7 +61,6 @@ def show_company_group_menu(api_key: str, tokens: dict):
         else:
             print("--------------------------")
             print("Daftar Operator/Perusahaan")
-            keys = list(family_codes_grouped.keys())
             for idx, perusahaan in enumerate(keys, 1):
                 print(f"{idx}. {perusahaan}")
             print("99. Kembali ke menu utama")
