@@ -250,7 +250,7 @@ def show_banner():
             padding=(1, 2)
         )
         console.print(Align.center(header))
-        _print_gradient_title("Tembak Paket Internet XL")
+        _print_gradient_title("Tembak Paket Internet Murah XL")
         console.print(Align.center(Rule(style=_c("border_primary"))))
     else:
         print("--------------------------")
