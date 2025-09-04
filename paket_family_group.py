@@ -32,9 +32,9 @@ def show_family_group_menu(api_key: str, tokens: dict):
     while in_group_menu:
         clear_screen()
         if RICH_OK:
-            # Border panel untuk Family Code Group
+            # Border panel
             table = Table(
-                title=f"[{_c('text_title')}]Family Code Group[/]", show_header=True,
+                title=f"[{_c('text_title')}]Code Group[/]", show_header=True,
                 header_style=_c("text_sub"), box=ROUNDED
             )
             table.add_column("No", style=_c("text_number"), width=4)
@@ -44,7 +44,7 @@ def show_family_group_menu(api_key: str, tokens: dict):
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu utama[/]")
             panel = Panel(
                 Align.center(table),
-                title=f"[{_c('text_title')}]Pilih Family Code[/]",
+                title=f"[{_c('text_title')}]Pilih Paket Lainnya..[/]",
                 border_style=_c("border_primary"),
                 box=ROUNDED
             )
