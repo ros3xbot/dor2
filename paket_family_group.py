@@ -1,7 +1,6 @@
 import json
 from api_request import send_api_request, get_family
 from ui import clear_screen, show_package_details
-from auth_helper import AuthInstance
 
 # Kumpulan Family Code yang akan ditampilkan di submenu
 family_codes_grouped = {
