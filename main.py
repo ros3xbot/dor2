@@ -4,6 +4,7 @@ from api_request import *
 from ui import *
 from paket_xut import get_package_xut
 from paket_mastif import get_package_mastif
+from paket_family_group import get_package_family_group
 from my_package import fetch_my_packages
 from paket_custom_family import get_packages_by_family
 from auth_helper import AuthInstance
@@ -43,12 +44,17 @@ def main():
                 show_package_menu(packages)
                 continue
             elif choice == "5":
+                # family group
+                packages = get_package_family_group()
+                show_package_menu(packages)
+                continue
+            elif choice == "6":
                 family_code = input("Enter family code (or '99' to cancel): ").strip()
                 if family_code == "99":
                     continue
                 get_packages_by_family(family_code)
                 continue
-            elif choice == "6":
+            elif choice == "7":
                 # <<< Tambahan: Ganti Tema >>>
                 change_theme_menu()
                 continue
