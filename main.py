@@ -4,7 +4,7 @@ from api_request import *
 from ui import *
 from paket_xut import get_package_xut
 from paket_mastif import get_package_mastif
-from paket_family_group import get_package_family_group
+from paket_family_group import get_package_group
 from my_package import fetch_my_packages
 from paket_custom_family import get_packages_by_family
 from auth_helper import AuthInstance
@@ -45,7 +45,7 @@ def main():
                 continue
             elif choice == "5":
                 # family group
-                packages = get_package_family_group()
+                packages = get_package_group()
                 show_package_menu(packages)
                 continue
             elif choice == "6":
