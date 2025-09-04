@@ -104,10 +104,10 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str):
         clear_screen()
         family_name = package_family.get("name", "Tidak diketahui")
         if RICH_OK:
-            panel_title = f"[{_c('text_title')}]Family Name:[/] [{_c('text_ok')}]{family_name}[/{_c('text_ok')}]"
+            panel_title = f"[{_c('text_title')}] Family Code Name:[/] [{_c('text_ok')}]{family_name}[/{_c('text_ok')}]"
             console.print(Align.center(Panel(panel_title, style=_c("border_info"), box=ROUNDED)))
             table = Table(
-                title=f"[{_c('text_title')}]Paket Tersedia[/]", show_header=True,
+                title=f"[{_c('text_title')}]Tersedia[/]", show_header=True,
                 header_style=_c("text_sub"), box=ROUNDED
             )
             table.add_column("No", style=_c("text_number"), width=4)
