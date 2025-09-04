@@ -18,7 +18,7 @@ def fetch_my_packages():
             print("No active user tokens found.")
         pause()
         return None
-        
+
     id_token = tokens.get("id_token")
     path = "api/v8/packages/quota-details"
     payload = {
@@ -35,7 +35,8 @@ def fetch_my_packages():
         print("===============================")
 
     res = send_api_request(api_key, path, payload, id_token, "POST")
-    if res.get("status") !=ICH_OK:
+    if res.get("status") != "SUCCESS":
+        if RICH_OK:
             console.print(f"[{_c('text_err')}]Failed to fetch packages[/]")
             console.print(f"[{_c('text_warn')}]Response: {res}[/]")
         else:
@@ -56,7 +57,8 @@ def fetch_my_packages():
 
         if RICH_OK:
             console.print(f"[{_c('text_sub')}]Fetching package no. {num} details...[/]")
-       . {num} details...")
+        else:
+            print(f"Fetching package no. {num} details...")
 
         package_details = get_package(api_key, tokens, quota_code)
         if package_details:
