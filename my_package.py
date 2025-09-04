@@ -10,6 +10,7 @@ try:
 except ImportError:
     pass
 
+# Fetch my packages
 def fetch_my_packages():
     api_key = AuthInstance.api_key
     tokens = AuthInstance.get_active_tokens()
@@ -31,7 +32,13 @@ def fetch_my_packages():
 
     clear_screen()
     if RICH_OK:
-        console.print(f"[{_c('text_title')}]Fetching my packages...[/]")
+        panel = Panel(
+            Align.center(f"[{_c('text_sub')}]Fetching my packages...[/]"),
+            title=f"[{_c('text_title')}]My Packages[/]",
+            border_style=_c("border_primary"),
+            box=ROUNDED
+        )
+        console.print(panel)
     else:
         print("Fetching my packages...")
 
@@ -48,29 +55,26 @@ def fetch_my_packages():
 
     quotas = res["data"]["quotas"]
     clear_screen()
-    # Tampilkan judul di atas tabel
     if RICH_OK:
-        console.print(f"[{_c('text_title')}]My Packages[/]")
         table = Table(
+            title=f"[{_c('text_title')}]My Packages[/]",
             show_header=True, header_style=_c("text_sub"), box=ROUNDED
         )
         table.add_column("No", style=_c("text_number"), width=4)
         table.add_column("Name", style=_c("text_body"))
         table.add_column("Quota Code", style=_c("text_sub"))
-        table.add_column("Group Code", style=_c("text_sub"))
         table.add_column("Family Code", style=_c("text_sub"))
-        table.add_column("Family Detail", style=_c("text_body"))
+        table.add_column("Group Code", style=_c("text_sub"))
     else:
         print("===============================")
         print("My Packages")
         print("===============================")
 
     for num, quota in enumerate(quotas, 1):
-        quota_code = quota.get("quota_code", "N/A")
-        group_code = quota.get("group_code", "N/A")
-        name = quota.get("name", "N/A")
+        quota_code = quota["quota_code"] # Can be used as option_code
+        group_code = quota["group_code"]
+        name = quota["name"]
         family_code = "N/A"
-        family_detail = ""
 
         # Info loading detail per paket
         if RICH_OK:
@@ -79,35 +83,32 @@ def fetch_my_packages():
             print(f"fetching package no. {num} details...")
 
         package_details = get_package(api_key, tokens, quota_code)
-        if package_details and "package_family" in package_details:
-            family_obj = package_details["package_family"]
-            family_code = family_obj.get("package_family_code", "N/A")
-            # Tampilkan detail family code secara utuh (str semua isi dict)
-            family_detail = "\n".join([f"{k}: {v}" for k, v in family_obj.items()])
-        else:
-            family_detail = "-"
+        if package_details:
+            family_code = package_details["package_family"]["package_family_code"]
 
         if RICH_OK:
             table.add_row(
                 str(num),
                 name,
                 quota_code,
-                group_code,
                 family_code,
-                family_detail
+                group_code
             )
         else:
             print("===============================")
             print(f"Package {num}")
             print(f"Name: {name}")
             print(f"Quota Code: {quota_code}")
-            print(f"Group Code: {group_code}")
             print(f"Family Code: {family_code}")
-            print("Family Detail:")
-            print(family_detail)
+            print(f"Group Code: {group_code}")
             print("===============================")
 
-    # Tabel ditampilkan langsung, tanpa panel/border
     if RICH_OK:
-        console.print(table)
+        panel = Panel(
+            Align.center(table),
+            title=f"[{_c('text_title')}]My Packages[/]",
+            border_style=_c("border_info"),
+            box=ROUNDED
+        )
+        console.print(panel)
     pause()
