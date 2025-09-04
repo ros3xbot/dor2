@@ -50,13 +50,24 @@ def fetch_my_packages():
     for num, quota in enumerate(quotas, 1):
         name = quota.get("name", "N/A")
         family_code = "N/A"
-        description = "-"
 
         if RICH_OK:
             console.print(f"[{_c('text_sub')}]Fetching package no. {num} details...[/]")
-        else : {name}\n"
-            f"Family Code : {family_code}\n"
-            f"Description : {description}"
+        else:
+            print(f"Fetching package no. {num} details...")
+
+        quota_code = quota.get("quota_code", None)
+        package_details = get_package(api_key, tokens, quota_code) if quota_code else None
+        if package_details and "package_family" in package_details:
+            family_obj = package_details["package_family"]
+            family_code = family_obj.get("package_family_code", "N/A")
+        else:
+            family_code = "N/A"
+
+        text = (
+            f"Package {num}\n"
+            f"Name        : {name}\n"
+            f"Family Code : {family_code}"
         )
 
         if RICH_OK:
