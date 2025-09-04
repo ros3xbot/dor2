@@ -3,7 +3,6 @@ from ui import clear_screen, pause, console, _c, RICH_OK
 from auth_helper import AuthInstance
 
 try:
-    from rich.table import Table
     from rich.panel import Panel
     from rich.box import ROUNDED
 except ImportError:
@@ -31,18 +30,7 @@ def fetch_my_packages():
     clear_screen()
     if RICH_OK:
         console.print(f"[{_c('text_title')}]My Packages[/]")
-        table = Table(
-            show_header=True, header_style=_c("text_sub"), box=ROUNDED
-        )
-        table.add_column("No", style=_c("text_number"), width=4)
-        table.add_column("Name", style=_c("text_body"))
-        table.add_column("Quota Code", style=_c("text_sub"))
-        table.add_column("Group Code", style=_c("text_sub"))
-        table.add_column("Family Code", style=_c("text_sub"))
-        # Info utama di tabel
-        rows = []
     else:
-        print("===============================")
         print("My Packages")
         print("===============================")
 
@@ -69,7 +57,7 @@ def fetch_my_packages():
         if RICH_OK:
             console.print(f"[{_c('text_sub')}]Fetching package no. {num} details...[/]")
         else:
-            print(f"fetching package no. {num} details...")
+            print(f"Fetching package no. {num} details...")
 
         package_details = get_package(api_key, tokens, quota_code)
         if package_details and "package_family" in package_details:
@@ -79,33 +67,21 @@ def fetch_my_packages():
         else:
             family_detail = "-"
 
+        # Tampilkan paket tanpa tabel
+        text = (
+            f"Package {num}\n"
+            f"Name        : {name}\n"
+            f"Quota Code  : {quota_code}\n"
+            f"Group Code  : {group_code}\n"
+            f"Family Code : {family_code}\n"
+            f"Family Detail:\n{family_detail}"
+        )
+
         if RICH_OK:
-            table.add_row(
-                str(num),
-                name,
-                quota_code,
-                group_code,
-                family_code
-            )
-            rows.append((num, family_detail))
+            console.print(Panel(text, title=f"Paket {num}", border_style=_c("border_info"), box=ROUNDED))
         else:
             print("===============================")
-            print(f"Package {num}")
-            print(f"Name: {name}")
-            print(f"Quota Code: {quota_code}")
-            print(f"Group Code: {group_code}")
-            print(f"Family Code: {family_code}")
-            print("Family Detail:")
-            print(family_detail)
+            print(text)
             print("===============================")
 
-    # Tampilkan tabel utama dan detail family terpisah di bawahnya
-    if RICH_OK:
-        console.print(table)
-        for num, family_detail in rows:
-            # Family detail bukan dalam tabel!
-            if family_detail and family_detail != "-":
-                console.print(Panel(family_detail, title=f"Family Detail Paket {num}", border_style=_c("border_info"), box=ROUNDED))
-            else:
-                console.print(Panel("Tidak ada detail family.", title=f"Family Detail Paket {num}", border_style=_c("border_warn"), box=ROUNDED))
     pause()
