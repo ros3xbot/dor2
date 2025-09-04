@@ -20,7 +20,7 @@ git clone https://github.com/ros3xbot/dor2
 ```
 5. Open the folder
 ```
-cd dor
+cd dor2
 ```
 6. Install dependencies
 ```
