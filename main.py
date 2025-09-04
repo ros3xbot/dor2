@@ -4,12 +4,13 @@ from api_request import *
 from ui import *
 from paket_xut import get_package_xut
 from paket_mastif import get_package_mastif
-from paket_family_group import get_package_group
+from paket_family_group import show_family_group_menu  # Perbaikan: gunakan fungsi yang benar
 from my_package import fetch_my_packages
 from paket_custom_family import get_packages_by_family
 from auth_helper import AuthInstance
 
 show_menu = True
+
 def main():
     while True:
         active_user = AuthInstance.get_active_user()
@@ -44,9 +45,8 @@ def main():
                 show_package_menu(packages)
                 continue
             elif choice == "5":
-                # family group
-                packages = get_package_group()
-                show_package_menu(packages)
+                # family group (PERBAIKAN UTAMA)
+                show_family_group_menu(AuthInstance.api_key, active_user["tokens"])
                 continue
             elif choice == "6":
                 family_code = input("Enter family code (or '99' to cancel): ").strip()
