@@ -1,5 +1,3 @@
-# MyXL CLI Client
-
 # How to get API Key
 Chat telegram bot [@fykxt_bot](https://t.me/fykxt_bot) with message `/viewkey`. Copy the API key.
 
@@ -18,18 +16,24 @@ pkg install python
 ```
 4. Clone this repo
 ```
-git clone https://github.com/flyxt/myxl-cli
+git clone https://github.com/dratx1/dor
 ```
 5. Open the folder
 ```
-cd myxl-cli
+cd dor
 ```
 6. Install dependencies
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt && pip install --upgrade rich
 ```
 7. Run the script
 ```
 python main.py
 ```
 8. Input your API key when prompted
+
+
+# For updates
+```
+git pull --rebase
+```
