@@ -1,4 +1,3 @@
-##
 import json
 import os
 import sys
@@ -238,14 +237,14 @@ def show_banner():
     if RICH_OK:
         header = Panel.fit(
             Align.center(Text.assemble(
-                ("----✦ ", _c("text_key")),
+                ("-----✦ ", _c("text_key")),
                 ("Dor XL © 2025", _c("text_title")),
                 (" by ", "dim"),
                 ("Flyxt9", _c("text_sub")),
-                (" ✦----", _c("text_key"))
+                (" ✦-----", _c("text_key"))
             )),
             title=f"[{_c('text_title')}]Selamat Datang[/]",
-            subtitle="[dim]Powered by DratPVPN[/]",
+            subtitle="[dim]Powered by DratPVPN™[/]",
             border_style=_c("border_primary"),
             box=DOUBLE,
             padding=(1, 2)
