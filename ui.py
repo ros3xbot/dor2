@@ -238,9 +238,9 @@ def show_banner():
         header = Panel.fit(
             Align.center(Text.assemble(
                 ("-----✦ ", _c("text_key")),
-                ("Dor XL © 2025", _c("text_title")),
+                ("Panel Dor Paket 2025", _c("text_title")),
                 (" by ", "dim"),
-                ("Flyxt9", _c("text_sub")),
+                ("Barbex_ID", _c("text_sub")),
                 (" ✦-----", _c("text_key"))
             )),
             title=f"[{_c('text_title')}]SELAMAT DATANG[/]",
@@ -250,7 +250,7 @@ def show_banner():
             padding=(1, 2)
         )
         console.print(Align.center(header))
-        _print_gradient_title("Tembak Paket Internet Murah XL")
+        _print_gradient_title("Tembak Paket Internet Murah")
         console.print(Align.center(Rule(style=_c("border_primary"))))
     else:
         print("--------------------------")
