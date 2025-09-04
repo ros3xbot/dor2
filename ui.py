@@ -237,11 +237,11 @@ def show_banner():
     if RICH_OK:
         header = Panel.fit(
             Align.center(Text.assemble(
-                ("-----✦ ", _c("text_key")),
+                ("---✦ ", _c("text_key")),
                 ("Panel Dor Paket 2025", _c("text_title")),
                 (" by ", "dim"),
                 ("Barbex_ID", _c("text_sub")),
-                (" ✦-----", _c("text_key"))
+                (" ✦---", _c("text_key"))
             )),
             title=f"[{_c('text_title')}]SELAMAT DATANG[/]",
             subtitle="[dim]Powered by dratx1[/]",
