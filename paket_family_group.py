@@ -237,5 +237,3 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str, perusa
         if is_done:
             in_package_menu = False
             return
-
-# Untuk memulai menu, panggil: show_company_group_menu(api_key, tokens)
