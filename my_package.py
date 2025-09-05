@@ -4,7 +4,7 @@ from auth_helper import AuthInstance
 
 try:
     from rich.panel import Panel
-    from rich.box import ROUNDED, HEAVY  # Anda bisa pilih border lain dari rich.box seperti HEAVY, DOUBLE, SQUARE, dsb.
+    from rich.box import ROUNDED  # Anda bisa pilih border lain dari rich.box seperti HEAVY, DOUBLE, SQUARE, dsb.
 except ImportError:
     Panel = None
     ROUNDED = None
