@@ -17,7 +17,7 @@ try:
 except ImportError:
     pass
 
-# Struktur: perusahaan -> kode family group
+# Struktur kode family group
 family_codes_grouped = {
     "XL": {
         "1": {"name": "Xta Unlimited Turbo", "code": "08a3b1e6-8e78-4e45-a540-b40f06871cfe"},
@@ -32,23 +32,23 @@ family_codes_grouped = {
         # Tambahkan kode family AXIS jika ada
         # "1": {"name": "Axis Owsem", "code": "AXIS-CODE-1"},
     },
-    # Tambahkan perusahaan/operator lain di sini
+    # Tambahkan operator lain di sini
 }
 
-def show_company_group_menu(api_key: str, tokens: dict):
-    in_company_menu = True
-    while in_company_menu:
+def show_other_group_menu(api_key: str, tokens: dict):
+    in_other_menu = True
+    while in_other_menu:
         clear_screen()
         keys = list(family_codes_grouped.keys())
         if RICH_OK:
             table = Table(
-                title=f"[{_c('text_title')}]Daftar Operator/Perusahaan[/]",
+                title=f"[{_c('text_title')}]Daftar Operator[/]",
                 show_header=True, header_style=_c("text_sub"), box=ROUNDED
             )
             table.add_column("No", style=_c("text_number"), width=4)
-            table.add_column("Perusahaan/Operator", style=_c("text_body"))
-            for idx, perusahaan in enumerate(keys, 1):
-                table.add_row(str(idx), perusahaan)
+            table.add_column("Operator", style=_c("text_body"))
+            for idx, lain in enumerate(keys, 1):
+                table.add_row(str(idx), lain)
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu utama[/]")
             panel = Panel(
                 Align.center(table),
@@ -60,15 +60,15 @@ def show_company_group_menu(api_key: str, tokens: dict):
             choice = Prompt.ask(f"[{_c('text_sub')}]Pilih operator (nomor)").strip()
         else:
             print("--------------------------")
-            print("Daftar Operator/Perusahaan")
-            for idx, perusahaan in enumerate(keys, 1):
+            print("Daftar Operator")
+            for idx, lain in enumerate(keys, 1):
                 print(f"{idx}. {perusahaan}")
             print("99. Kembali ke menu utama")
             print("--------------------------")
             choice = input("Pilih operator (nomor): ").strip()
 
         if choice == "99":
-            in_company_menu = False
+            in_other_menu = False
             return
 
         if not choice.isdigit() or int(choice) < 1 or int(choice) > len(keys):
@@ -81,16 +81,16 @@ def show_company_group_menu(api_key: str, tokens: dict):
             continue
 
         perusahaan = keys[int(choice) - 1]
-        show_family_group_menu(api_key, tokens, perusahaan)
+        show_family_group_menu(api_key, tokens, lain)
 
-def show_family_group_menu(api_key: str, tokens: dict, perusahaan: str):
+def show_family_group_menu(api_key: str, tokens: dict, lain: str):
     in_group_menu = True
-    families = family_codes_grouped.get(perusahaan, {})
+    families = family_codes_grouped.get(lain, {})
     while in_group_menu:
         clear_screen()
         if RICH_OK:
             table = Table(
-                title=f"[{_c('text_title')}]Family Code Group - {perusahaan}[/]", show_header=True,
+                title=f"[{_c('text_title')}]Family Code Group - {lain}[/]", show_header=True,
                 header_style=_c("text_sub"), box=ROUNDED
             )
             table.add_column("No", style=_c("text_number"), width=4)
@@ -100,7 +100,7 @@ def show_family_group_menu(api_key: str, tokens: dict, perusahaan: str):
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu operator[/]")
             panel = Panel(
                 Align.center(table),
-                title=f"[{_c('text_title')}]Pilih Family Code {perusahaan}[/]",
+                title=f"[{_c('text_title')}]Pilih Family Code {lain}[/]",
                 border_style=_c("border_primary"),
                 box=ROUNDED
             )
@@ -108,7 +108,7 @@ def show_family_group_menu(api_key: str, tokens: dict, perusahaan: str):
             choice = Prompt.ask(f"[{_c('text_sub')}]Pilih kategori (nomor)").strip()
         else:
             print("--------------------------")
-            print(f"Pilih Kategori Family Code ({perusahaan})")
+            print(f"Pilih Kategori Family Code ({lain})")
             for key, value in families.items():
                 print(f"{key}. {value['name']}")
             print("99. Kembali ke menu operator")
@@ -130,9 +130,9 @@ def show_family_group_menu(api_key: str, tokens: dict, perusahaan: str):
             continue
 
         family_code = selected_family["code"]
-        show_packages_by_family(api_key, tokens, family_code, perusahaan)
+        show_packages_by_family(api_key, tokens, family_code, lain)
 
-def show_packages_by_family(api_key: str, tokens: dict, family_code: str, perusahaan: str):
+def show_packages_by_family(api_key: str, tokens: dict, family_code: str, lain: str):
     packages = []
     data = get_family(api_key, tokens, family_code)
     if not data or not isinstance(data, dict):
@@ -160,7 +160,7 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str, perusa
         clear_screen()
         family_name = package_family.get("name", "Tidak diketahui")
         if RICH_OK:
-            panel_title = f"[{_c('text_title')}]Family Name ({perusahaan}):[/] [{_c('text_ok')}]{family_name}[/{_c('text_ok')}]"
+            panel_title = f"[{_c('text_title')}]Family Name ({lain}):[/] [{_c('text_ok')}]{family_name}[/{_c('text_ok')}]"
             console.print(Align.center(Panel(panel_title, style=_c("border_info"), box=ROUNDED)))
             table = Table(
                 title=f"[{_c('text_title')}]Paket Tersedia[/]", show_header=True,
@@ -171,7 +171,7 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str, perusa
             table.add_column("Harga", style=_c("text_money"))
         else:
             print("--------------------------")
-            print(f"Family Name ({perusahaan}): {family_name}")
+            print(f"Family Name ({lain}): {family_name}")
             print("Paket Tersedia")
             print("--------------------------")
 
@@ -199,7 +199,7 @@ def show_packages_by_family(api_key: str, tokens: dict, family_code: str, perusa
             table.add_row("99", f"[{_c('text_err')}]Kembali ke menu sebelumnya[/]", "")
             panel = Panel(
                 Align.center(table),
-                title=f"[{_c('text_title')}]Daftar Paket {perusahaan}[/]",
+                title=f"[{_c('text_title')}]Daftar Paket {lain}[/]",
                 border_style=_c("border_info"),
                 box=ROUNDED
             )
