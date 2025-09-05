@@ -32,7 +32,7 @@ def fetch_my_packages():
     }
 
     clear_screen()
-    # Judul "My Packages" dalam box/panel
+    # Judul dalam box/panel
     if RICH_OK and Panel and ROUNDED and console:
         console.print(
             Panel(
@@ -76,7 +76,7 @@ def fetch_my_packages():
         group_code = quota.get("group_code", "N/A")
         name = quota.get("name", "N/A")
         family_code = "N/A"
-        description = "No description available."
+        description = "N/A"
 
         if RICH_OK and console:
             console.print(f"[{_c('text_sub')}]Fetching package no. {num} details...[/]")
@@ -93,7 +93,7 @@ def fetch_my_packages():
             else:
                 family_code = "N/A"
             # Ambil description dari detail paket, fallback jika tidak ada
-            description = package_details.get("description", "No description available.")
+            description = package_details.get("description", "N/A")
         else:
             family_code = "N/A"
             description = "No description available."
