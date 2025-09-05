@@ -76,7 +76,7 @@ def fetch_my_packages():
         group_code = quota.get("group_code", "N/A")
         name = quota.get("name", "N/A")
         family_code = "N/A"
-        description = "No description available."
+        description = quota.get("description", "No description available.")
 
         if RICH_OK and console:
             console.print(f"[{_c('text_sub')}]Fetching package no. {num} details...[/]")
@@ -86,16 +86,11 @@ def fetch_my_packages():
             print("=" * 32)
 
         package_details = get_package(api_key, tokens, quota_code)
-        if isinstance(package_details, dict):
-            if "package_family" in package_details:
-                family_obj = package_details["package_family"]
-                family_code = family_obj.get("package_family_code", "N/A")
-            else:
-                family_code = "N/A"
-            description = package_details.get("description", "No description available.")
+        if isinstance(package_details, dict) and "package_family" in package_details:
+            family_obj = package_details["package_family"]
+            family_code = family_obj.get("package_family_code", "N/A")
         else:
             family_code = "N/A"
-            description = "No description available."
 
         text = (
             f"Package {num}\n"
