@@ -61,7 +61,7 @@ def show_other_group_menu(api_key: str, tokens: dict):
             print("--------------------------")
             print("Daftar Operator")
             for idx, lain in enumerate(keys, 1):
-                print(f"{idx}. {perusahaan}")
+                print(f"{idx}. {lain}")
             print("99. Kembali ke menu utama")
             print("--------------------------")
             choice = input("Pilih operator (nomor): ").strip()
