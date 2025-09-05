@@ -32,7 +32,6 @@ family_codes_grouped = {
         # Tambahkan kode family AXIS jika ada
         # "1": {"name": "Axis Owsem", "code": "AXIS-CODE-1"},
     },
-    # Tambahkan operator lain di sini
 }
 
 def show_other_group_menu(api_key: str, tokens: dict):
