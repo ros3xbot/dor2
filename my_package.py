@@ -6,9 +6,17 @@ try:
     from rich.panel import Panel
     from rich.box import ROUNDED
 except ImportError:
-    pass
+    Panel = None
+    ROUNDED = None
+    # Jika modul rich gagal diimport, matikan RICH_OK agar tidak terjadi error saat print Panel
+    RICH_OK = False
 
 def fetch_my_packages():
+    """
+    Mengambil dan menampilkan daftar paket user dari API.
+    Jika tidak ada token aktif, akan menampilkan error.
+    Jika gagal request API, akan menampilkan pesan error.
+    """
     api_key = AuthInstance.api_key
     tokens = AuthInstance.get_active_tokens()
     if not tokens:
@@ -45,7 +53,15 @@ def fetch_my_packages():
         pause()
         return None
 
-    quotas = res["data"]["quotas"]
+    quotas = res.get("data", {}).get("quotas", [])  # Perbaikan: akses lebih aman
+
+    if not quotas:
+        if RICH_OK:
+            console.print(f"[{_c('text_warn')}]No packages found.[/]")
+        else:
+            print("No packages found.")
+        pause()
+        return None
 
     for num, quota in enumerate(quotas, 1):
         quota_code = quota.get("quota_code", "N/A")
@@ -59,7 +75,7 @@ def fetch_my_packages():
             print(f"Fetching package no. {num} details...")
 
         package_details = get_package(api_key, tokens, quota_code)
-        if package_details and "package_family" in package_details:
+        if isinstance(package_details, dict) and "package_family" in package_details:
             family_obj = package_details["package_family"]
             family_code = family_obj.get("package_family_code", "N/A")
         else:
@@ -73,7 +89,7 @@ def fetch_my_packages():
             f"Family Code : {family_code}"
         )
 
-        if RICH_OK:
+        if RICH_OK and Panel and ROUNDED:
             console.print(Panel(text, title=f"Paket {num}", border_style=_c("border_info"), box=ROUNDED))
         else:
             print("===============================")
